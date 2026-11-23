@@ -1,14 +1,8 @@
-<x-layout title="Create Idea">
+<x-layout title="Create Idea" backRoute="ideas.index">
     <form action="{{ route('ideas.store') }}" method="POST">
         @csrf
-        <div class="form-group">
-            <label for="title">Title</label>
-            <input type="text" class="" name="title" id="title" required>
-        </div>
-        <div class="form-group">
-            <label for="description">Description</label>
-            <textarea class="form-control" name="description" id="description" required></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary">Add Idea</button>
+        <x-text-input label="Title" type="text" name="title" id="title" required />
+        <x-text-area label="Description" name="description" id="description" required cols="30" rows="5" />
+        <x-button variant="primary" type="submit">Save</x-button>
     </form>
 </x-layout>

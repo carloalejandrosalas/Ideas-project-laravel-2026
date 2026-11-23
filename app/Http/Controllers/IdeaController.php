@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Idea;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class IdeaController extends Controller
 {
@@ -32,7 +33,20 @@ class IdeaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = $request->user();
+
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+        ]);
+
+        Idea::create([
+            'title' => $request->title,
+            'description' => $request->description,
+            'user_id' => $user->id,
+        ]);
+
+        return redirect()->route('ideas.index');
     }
 
     /**
@@ -49,6 +63,9 @@ class IdeaController extends Controller
     public function edit(string $id)
     {
         //
+        $idea = Idea::findOrFail($id);
+
+        return view('pages.ideas.edit', compact('idea'));
     }
 
     /**
@@ -57,6 +74,21 @@ class IdeaController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $idea = Idea::findOrFail($id);
+
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+        ]);
+
+        $idea->update([
+            'title' => $request->title,
+            'description' => $request->description,
+        ]);
+
+        Session::flash('success', 'Idea updated successfully.');
+
+        return redirect()->route('ideas.index');
     }
 
     /**
@@ -65,5 +97,21 @@ class IdeaController extends Controller
     public function destroy(string $id)
     {
         //
+        $idea = Idea::findOrFail($id);
+        $idea->delete();
+
+        Session::flash('success', 'Idea deleted successfully.');
+
+        return redirect()->route('ideas.index');
+    }
+
+    /**
+     * show the form for deleting the specified resource.
+     */
+    public function showDelete(string $id)
+    {
+        $idea = Idea::findOrFail($id);
+
+        return view('pages.ideas.delete', compact('idea'));
     }
 }

@@ -1,15 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
-@props(['addRoute' => false, 'addText' => '+ Add Idea', 'title' => ''])
+<html lang="en" class="h-full">
+@props(['addRoute' => false, 'addText' => '+ Add Idea', 'title' => '', 'backRoute' => false])
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ $title ? $title . ' - ' : '' }} Ideas App</title>
     @vite('resources/css/app.css')
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
 </head>
 
-<body class="bg-gradient-to-b from-slate-50 to-slate-100">
+<body class="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100">
     <!-- Navigation Bar -->
     <nav class="sticky top-0 z-50 border-b border-slate-200 bg-white/95 shadow-sm backdrop-blur-sm">
         <div class="mx-auto max-w-7xl px-4 py-3 sm:px-6 lg:px-8">
@@ -21,12 +22,20 @@
                     <span class="hidden sm:inline">Ideas App</span>
                 </a>
 
-                <!-- Navigation Links -->
                 <div class="flex items-center gap-1">
                     <ul class="flex gap-1">
-                        <x-navlink href="{{ route('ideas.index') }}">View Ideas</x-navlink>
+                        @auth
+                            <!-- Authenticated Links -->
+                            <x-navlink href="{{ route('ideas.index') }}">View Ideas</x-navlink>
+                            <x-navlink href="{{ route('account') }}">Account</x-navlink>
+                        @endauth
                         <x-navlink href="{{ route('about') }}">About Us</x-navlink>
                         <x-navlink href="{{ route('contact') }}">Contact Us</x-navlink>
+                        @guest
+                            <!-- Guest Links -->
+                            <x-navlink href="{{ route('login') }}">Login</x-navlink>
+                            <x-navlink href="{{ route('register') }}">Register</x-navlink>
+                        @endguest
                     </ul>
                 </div>
             </div>
@@ -38,6 +47,10 @@
         <!-- Header Section -->
         <div class="mb-8 flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
             <div>
+                @if ($backRoute)
+                    <a href="{{ route($backRoute) }}" class="text-blue-600 hover:text-blue-800 d-inline-block">&larr;
+                        Back</a>
+                @endif
                 <h1 class="text-xl font-bold text-slate-900 sm:text-xl">{{ $title }}</h1>
             </div>
             @if ($addRoute)
@@ -53,6 +66,15 @@
             {{ $slot }}
         </main>
     </div>
+
+    <script>
+        // Initialize Lucide icons when the page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+        });
+    </script>
 </body>
 
 </html>
