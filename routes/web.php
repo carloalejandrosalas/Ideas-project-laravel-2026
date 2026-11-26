@@ -5,14 +5,6 @@ use App\Http\Controllers\IdeaController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
-    Route::get('/contact', function () {
-        return view('pages.contact');
-    })->name('contact');
-
-    Route::get('/about', function () {
-        return view('pages.about');
-    })->name('about');
-
     /**
      * Auth routes
      */
@@ -38,6 +30,15 @@ Route::middleware('auth')->group(function () {
     Route::resource('ideas', IdeaController::class);
     Route::get('ideas/{idea}/delete', [IdeaController::class, 'showDelete'])->name('ideas.showDelete');
 });
+
+// Public pages routes
+Route::get('/contact', function () {
+    return view('pages.contact');
+})->name('contact');
+
+Route::get('/about', function () {
+    return view('pages.about');
+})->name('about');
 
 Route::get('/', function () {
     return view('pages.welcome');
