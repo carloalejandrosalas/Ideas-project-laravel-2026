@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html lang="en" class="h-full">
-@props(['addRoute' => false, 'addText' => '+ Add Idea', 'title' => '', 'backRoute' => false, 'backRouteParams' => [], 'showBack' => false])
+@props([
+    'addRoute' => false,
+    'addText' => '+ Add Idea',
+    'title' => '',
+    'backRoute' => false,
+    'backRouteParams' => [],
+    'showBack' => false,
+])
 
 <head>
     <meta charset="UTF-8">
@@ -13,31 +20,39 @@
 <body class="min-h-screen bg-gradient-to-b from-slate-50 to-slate-100">
     <!-- Navigation Bar -->
     <nav class="sticky top-0 z-50 border-b border-slate-200 bg-white/95 shadow-sm backdrop-blur-sm">
-        <div class="mx-auto max-w-7xl px-4 py-3 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between">
-                <!-- Logo -->
+        <div class="flex justify-between items-center p-4">
+            <!-- Logo -->
+            <div>
                 <a href="{{ route('welcome') }}"
                     class="flex items-center gap-2 text-xl font-bold text-slate-900 transition-colors duration-200 hover:text-blue-600">
                     <span class="text-2xl">🗒️</span>
                     <span class="hidden sm:inline">Ideas App</span>
                 </a>
+            </div>
 
-                <div class="flex items-center gap-1">
-                    <ul class="flex gap-1">
-                        @auth
-                            <!-- Authenticated Links -->
-                            <x-navlink href="{{ route('ideas.index') }}">View Ideas</x-navlink>
-                            <x-navlink href="{{ route('account') }}">Account</x-navlink>
-                        @endauth
-                        <x-navlink href="{{ route('about') }}">About Us</x-navlink>
-                        <x-navlink href="{{ route('contact') }}">Contact Us</x-navlink>
-                        @guest
-                            <!-- Guest Links -->
-                            <x-navlink href="{{ route('login') }}">Login</x-navlink>
-                            <x-navlink href="{{ route('register') }}">Register</x-navlink>
-                        @endguest
-                    </ul>
-                </div>
+            <div class="flex items-center gap-1">
+                <ul class="flex gap-1">
+                    @auth
+                        <!-- Authenticated Links -->
+                        <x-navlink href="{{ route('ideas.index') }}">View Ideas</x-navlink>
+                    @endauth
+
+                    <x-navlink href="{{ route('about') }}">About Us</x-navlink>
+                    <x-navlink href="{{ route('contact') }}">Contact Us</x-navlink>
+
+                </ul>
+            </div>
+            <div class="flex gap-1">
+                <ul class="flex gap-1">
+                    @auth
+                        <x-navlink title="Account menu" href="{{ route('account') }}">{{ Auth::user()->name }}</x-navlink>
+                    @endauth
+                    @guest
+                        <!-- Guest Links -->
+                        <x-navlink href="{{ route('login') }}">Login</x-navlink>
+                        <x-navlink href="{{ route('register') }}">Register</x-navlink>
+                    @endguest
+                </ul>
             </div>
         </div>
     </nav>
