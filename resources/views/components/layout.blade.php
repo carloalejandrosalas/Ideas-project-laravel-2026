@@ -45,7 +45,8 @@
             <div class="flex gap-1">
                 <ul class="flex gap-1">
                     @auth
-                        <x-navlink title="Account menu" href="{{ route('account') }}">{{ Auth::user()->name }}</x-navlink>
+                        <x-navlink variant="secondary" title="Account menu"
+                            href="{{ route('account') }}">{{ Auth::user()->name }}</x-navlink>
                     @endauth
                     @guest
                         <!-- Guest Links -->
