@@ -7,7 +7,7 @@
             @endif
         </label>
         <input {{ $attributes->merge(['class' => 'bg-gray-100 border border-gray-300 rounded p-2 rounded-lg']) }}>
-        <span class="text-red-500">
+        <span class="text-red-500 text-sm">
             @error($attributes->get('name'))
                 {{ $message }}
             @enderror

@@ -4,10 +4,6 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\IdeaController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('pages.welcome');
-})->name('welcome');
-
 Route::middleware('guest')->group(function () {
     Route::get('/contact', function () {
         return view('pages.contact');
@@ -24,7 +20,10 @@ Route::middleware('guest')->group(function () {
     Route::post('/login', [AuthController::class, 'login'])->name('login.post');
     Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
     Route::post('/register', [AuthController::class, 'register'])->name('register.post');
-    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::get('/reset-password', [AuthController::class, 'showPasswordReset'])->name('request.reset');
+    Route::post('/reset-password', [AuthController::class, 'sendPasswordResetLink'])->name('request.password.link');
+    Route::get('/new-password/{token}', [AuthController::class, 'showNewPasswordForm'])->name('request.password.new');
+    Route::post('/new-password', [AuthController::class, 'newPassword'])->name('password.update');
 });
 
 /**
@@ -34,7 +33,16 @@ Route::middleware('auth')->group(function () {
     Route::get('/account', [AuthController::class, 'showAccount'])->name('account');
     Route::put('/account', [AuthController::class, 'updateAuthenticatedUser'])->name('account.update');
     Route::put('/account/password', [AuthController::class, 'updatePassword'])->name('account.password.update');
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
     Route::resource('ideas', IdeaController::class);
     Route::get('ideas/{idea}/delete', [IdeaController::class, 'showDelete'])->name('ideas.showDelete');
+});
+
+Route::get('/', function () {
+    return view('pages.welcome');
+})->name('welcome');
+
+Route::get('*', function () {
+    return redirect()->route('welcome');
 });

@@ -13,6 +13,10 @@
         case 'primary':
             $commonClasses .= ' bg-blue-600 text-white hover:bg-blue-700';
             break;
+        case 'link':
+            $commonClasses =
+                'mt-2 px-0 py-0 text-blue-600 underline text-md rounded-md cursor-pointer inline-flex items-center';
+            break;
         default:
             $commonClasses .= ' bg-gray-200 hover:bg-gray-300';
             break;
