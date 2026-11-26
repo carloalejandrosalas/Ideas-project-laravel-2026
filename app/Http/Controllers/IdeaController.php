@@ -52,32 +52,24 @@ class IdeaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Idea $idea)
     {
-        //
-        $idea = Idea::findOrFail($id);
-
         return view('pages.ideas.show', compact('idea'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Idea $idea)
     {
-        //
-        $idea = Idea::findOrFail($id);
-
         return view('pages.ideas.edit', compact('idea'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Idea $idea)
     {
-        //
-        $idea = Idea::findOrFail($id);
 
         $request->validate([
             'title' => 'required|string|max:255',
@@ -97,10 +89,8 @@ class IdeaController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Idea $idea)
     {
-        //
-        $idea = Idea::findOrFail($id);
         $idea->delete();
 
         Session::flash('success', 'Idea deleted successfully.');
@@ -111,10 +101,8 @@ class IdeaController extends Controller
     /**
      * show the form for deleting the specified resource.
      */
-    public function showDelete(string $id)
+    public function showDelete(Idea $idea)
     {
-        $idea = Idea::findOrFail($id);
-
         return view('pages.ideas.delete', compact('idea'));
     }
 }
