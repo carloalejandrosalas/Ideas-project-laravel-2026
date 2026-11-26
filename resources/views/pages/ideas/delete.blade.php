@@ -4,6 +4,6 @@
         @csrf
         @method('DELETE')
         <x-button variant="danger" type="submit">Delete</x-button>
-        <x-button variant="default" :to="route('ideas.index')">Cancel</x-button>
+        <x-button variant="default" :to="route('home')">Cancel</x-button>
     </form>
 </x-layout>

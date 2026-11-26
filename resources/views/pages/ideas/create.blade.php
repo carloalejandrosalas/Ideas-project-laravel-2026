@@ -1,4 +1,4 @@
-<x-layout title="Create Idea" backRoute="ideas.index">
+<x-layout title="Create Idea" backRoute="home">
     <form action="{{ route('ideas.store') }}" method="POST">
         @csrf
         <x-text-input label="Title" type="text" name="title" id="title" required />

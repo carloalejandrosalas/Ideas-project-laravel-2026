@@ -16,7 +16,7 @@ class IdeaController extends Controller
         //
         $ideas = Idea::all();
 
-        return view('pages.ideas.index', compact('ideas'));
+        return view('pages.home', compact('ideas'));
     }
 
     /**
@@ -46,7 +46,7 @@ class IdeaController extends Controller
             'user_id' => $user->id,
         ]);
 
-        return redirect()->route('ideas.index');
+        return redirect()->route('home');
     }
 
     /**
@@ -83,7 +83,7 @@ class IdeaController extends Controller
 
         Session::flash('success', 'Idea updated successfully.');
 
-        return redirect()->route('ideas.index');
+        return redirect()->route('home');
     }
 
     /**
@@ -95,7 +95,7 @@ class IdeaController extends Controller
 
         Session::flash('success', 'Idea deleted successfully.');
 
-        return redirect()->route('ideas.index');
+        return redirect()->route('home');
     }
 
     /**

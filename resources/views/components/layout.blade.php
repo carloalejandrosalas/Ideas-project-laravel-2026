@@ -7,6 +7,7 @@
     'backRoute' => false,
     'backRouteParams' => [],
     'showBack' => false,
+    'showContainer' => true,
 ])
 
 <head>
@@ -34,7 +35,8 @@
                 <ul class="flex gap-1">
                     @auth
                         <!-- Authenticated Links -->
-                        <x-navlink href="{{ route('ideas.index') }}">View Ideas</x-navlink>
+                        <x-navlink href="{{ route('home') }}">Ideas</x-navlink>
+                        <x-navlink href="{{ route('ideas.create') }}">New Idea</x-navlink>
                     @endauth
 
                     <x-navlink href="{{ route('about') }}">About Us</x-navlink>
@@ -79,9 +81,16 @@
         </div>
 
         <!-- Main Content Area -->
-        <main class="rounded-xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
-            {{ $slot }}
-        </main>
+        @if ($showContainer)
+            <main class="rounded-xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
+                {{ $slot }}
+            </main>
+        @else
+            <main class="p-6 sm:p-8">
+                {{ $slot }}
+            </main>
+        @endif
+
     </div>
 
     <script>

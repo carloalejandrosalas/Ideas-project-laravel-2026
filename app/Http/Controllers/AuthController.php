@@ -22,7 +22,7 @@ class AuthController extends Controller
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
-            return redirect()->route('ideas.index');
+            return redirect()->route('home');
         }
 
         return back()->withErrors([
@@ -84,7 +84,7 @@ class AuthController extends Controller
         Session::put('user_id', $user->id);
         Session::put('user_name', $user->name);
 
-        return redirect()->route('ideas.index');
+        return redirect()->route('home');
     }
 
     public function updateAuthenticatedUser(Request $request)
