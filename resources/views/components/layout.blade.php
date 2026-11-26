@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" class="h-full">
-@props(['addRoute' => false, 'addText' => '+ Add Idea', 'title' => '', 'backRoute' => false])
+@props(['addRoute' => false, 'addText' => '+ Add Idea', 'title' => '', 'backRoute' => false, 'backRouteParams' => [], 'showBack' => false])
 
 <head>
     <meta charset="UTF-8">
@@ -47,8 +47,9 @@
         <!-- Header Section -->
         <div class="mb-8 flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
             <div>
-                @if ($backRoute)
-                    <a href="{{ route($backRoute) }}" class="text-blue-600 hover:text-blue-800 d-inline-block">&larr;
+                @if ($backRoute || $showBack)
+                    <a href="{{ $backRoute ? route($backRoute, $backRouteParams) : url()->previous() }}"
+                        class="text-blue-600 hover:text-blue-800 d-inline-block">&larr;
                         Back</a>
                 @endif
                 <h1 class="text-xl font-bold text-slate-900 sm:text-xl">{{ $title }}</h1>

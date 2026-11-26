@@ -55,6 +55,9 @@ class IdeaController extends Controller
     public function show(string $id)
     {
         //
+        $idea = Idea::findOrFail($id);
+
+        return view('pages.ideas.show', compact('idea'));
     }
 
     /**

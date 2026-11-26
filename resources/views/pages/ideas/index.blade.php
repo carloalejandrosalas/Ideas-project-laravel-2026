@@ -11,10 +11,7 @@
         <table class="mt-3 min-w-full divide-y divide-gray-200">
             <thead class="bg-gray-50">
                 <tr>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Idea</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Description
-                    </th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Title</th>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Created
                         At
                     </th>
@@ -27,10 +24,11 @@
                     <tr class="hover:bg-gray-50">
                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $idea->title }}
                         </td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $idea->description }}</td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                            {{ $idea->created_at->format('Y-m-d') }}</td>
-                        <td px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                            {{ $idea->created_at->format('m/d/Y H:i') }}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                            <a href="{{ route('ideas.show', $idea->id) }}"
+                                class="text-green-600 hover:text-green-900 bg-gray-100 px-2 py-1 rounded">View</a>
                             <a href="{{ route('ideas.edit', $idea->id) }}"
                                 class="text-blue-600 hover:text-blue-900 bg-gray-100 px-2 py-1 rounded">Edit</a>
                             <a href="{{ route('ideas.showDelete', $idea->id) }}"

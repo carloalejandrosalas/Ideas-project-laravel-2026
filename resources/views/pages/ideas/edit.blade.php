@@ -1,4 +1,4 @@
-<x-layout title="Edit Idea" backRoute="ideas.index">
+<x-layout title="Edit Idea" backRoute="ideas.show" :backRouteParams="[$idea->id]">
     <form action="{{ route('ideas.update', $idea) }}" method="POST">
         @csrf
         @method('PUT')
