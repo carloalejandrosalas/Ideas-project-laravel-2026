@@ -92,9 +92,10 @@ class IdeaController extends Controller
      */
     public function destroy(Idea $idea)
     {
+        $message = "Idea \"{$idea->title}\" deleted successfully.";
         $idea->delete();
 
-        Session::flash('success', 'Idea deleted successfully.');
+        Session::flash('success', $message);
 
         return redirect()->route('home');
     }

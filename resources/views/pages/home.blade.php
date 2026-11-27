@@ -1,8 +1,13 @@
 <x-layout showContainer="{{ false }}" title="List of Ideas" addRoute="ideas.create">
     @if (Session::has('success'))
-        <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
+        <x-alert variant="success">
             {{ Session::get('success') }}
-        </div>
+        </x-alert>
+    @endif
+    @if (Session::has('error'))
+        <x-alert variant="error">
+            {{ Session::get('error') }}
+        </x-alert>
     @endif
 
     <div class="grid grid-flow-row-dense grid-cols-3 grid-rows-3 gap-3">
