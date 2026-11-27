@@ -1,6 +1,4 @@
 <x-layout showContainer="{{ false }}" title="List of Ideas" addRoute="ideas.create">
-    <x-alert>Here is another one</x-alert>
-
     @if (Session::has('success'))
         <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
             {{ Session::get('success') }}
