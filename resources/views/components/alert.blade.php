@@ -1,7 +1,7 @@
 @props(['variant' => 'default'])
 
 @php
-    $commonClasses = 'rounded p-4 mb-4 rounded';
+    $commonClasses = 'rounded p-4 mb-4 rounded flex justify-between items-center';
 
     switch ($variant) {
         case 'success':
@@ -20,5 +20,9 @@
 @endphp
 
 <div class="{{ $commonClasses }}">
-    {{ $slot }}
+    <span>
+        {{ $slot }}
+    </span>
+    <x-button variant="transparent" type="button" class="ml-auto p-0 mt-0 mx-0 text-blue-700"
+        data-action="hide-alert">×</x-button>
 </div>

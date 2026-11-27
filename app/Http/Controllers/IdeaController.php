@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Idea;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 class IdeaController extends Controller
@@ -14,7 +15,7 @@ class IdeaController extends Controller
     public function index()
     {
         //
-        $ideas = Idea::all();
+        $ideas = Auth::user()->ideas;
 
         return view('pages.home', compact('ideas'));
     }
@@ -33,18 +34,18 @@ class IdeaController extends Controller
      */
     public function store(Request $request)
     {
-        $user = $request->user();
 
         $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',
         ]);
 
-        Idea::create([
+        Auth::user()->ideas()->create([
             'title' => $request->title,
             'description' => $request->description,
-            'user_id' => $user->id,
         ]);
+
+        Session::flash('success', 'Idea created successfully.');
 
         return redirect()->route('home');
     }

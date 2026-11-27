@@ -93,6 +93,7 @@
 
     </div>
 
+    @vite('resources/js/app.js')
     <script>
         // Initialize Lucide icons when the page loads
         document.addEventListener('DOMContentLoaded', () => {

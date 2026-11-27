@@ -1,4 +1,6 @@
 <x-layout showContainer="{{ false }}" title="List of Ideas" addRoute="ideas.create">
+    <x-alert>Here is another one</x-alert>
+
     @if (Session::has('success'))
         <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
             {{ Session::get('success') }}
@@ -13,35 +15,7 @@
             </x-card>
         @endforeach
     </div>
+    @if ($ideas->isEmpty())
+        <p class="col-span-3 text-center text-gray-500">No ideas created yet. Please create one to see it here 😊</p>
+    @endif
 </x-layout>
-
-{{-- <table class="mt-3 min-w-full divide-y divide-gray-200">
-            <thead class="bg-gray-50">
-                <tr>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Title</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Created
-                        At
-                    </th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions
-                    </th>
-                </tr>
-            </thead>
-            <tbody class="divide-y divide-gray-200 bg-white">
-                @foreach ($ideas as $idea)
-                    <tr class="hover:bg-gray-50">
-                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $idea->title }}
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                            {{ $idea->created_at->format('m/d/Y H:i') }}</td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                            <a href="{{ route('ideas.show', $idea->id) }}"
-                                class="text-green-600 hover:text-green-900 bg-gray-100 px-2 py-1 rounded">View</a>
-                            <a href="{{ route('ideas.edit', $idea->id) }}"
-                                class="text-blue-600 hover:text-blue-900 bg-gray-100 px-2 py-1 rounded">Edit</a>
-                            <a href="{{ route('ideas.showDelete', $idea->id) }}"
-                                class="text-red-600 hover:text-red-900 bg-gray-100 px-2 py-1 rounded">Delete</a>
-                        </td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table> --}}

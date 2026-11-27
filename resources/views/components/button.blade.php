@@ -17,6 +17,9 @@
             $commonClasses =
                 'mt-2 px-0 py-0 text-blue-600 underline text-md rounded-md cursor-pointer inline-flex items-center';
             break;
+        case 'transparent':
+            $commonClasses .= ' bg-transparent';
+            break;
         default:
             $commonClasses .= ' bg-gray-200 hover:bg-gray-300';
             break;
